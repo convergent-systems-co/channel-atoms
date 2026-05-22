@@ -1,0 +1,38 @@
+# ATOMS.yml — catalog manifest for channel-atoms
+#
+# See https://github.com/convergent-systems-co/atoms-spec for the canonical schema this conforms to.
+
+name: channel-atoms
+version: 0.1.0
+spec: atoms-spec/v1
+domain: channel-atoms.com
+ecosystem:
+  federation: xdao.co
+  redirect: channel.xdao.co
+
+purpose: |
+  Communication channels canonicalized — Slack, email, SMS, webhook, IRC, Matrix, Discord, RSS, iMessage. Typed protocols, endpoints, delivery semantics, transports, and auth methods so any agent or runtime can declare a channel once and reach it everywhere.
+
+atomTypes:
+  - protocol
+  - endpoint
+  - delivery-semantic
+  - transport
+  - auth-method
+
+compositionType: channels
+compositionDir: channels
+
+ruleTypes:
+  - rate-limit
+  - auth-required
+  - ordering-guarantee
+
+runtimeConsumers:
+  - aish
+  - olympus
+
+license: Apache-2.0
+maintainers:
+  - name: Convergent Systems
+    contact: maintainers@xdao.co
