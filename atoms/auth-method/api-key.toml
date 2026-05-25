@@ -8,7 +8,6 @@ created_at   = "2026-05-25T00:00:00Z"
 name        = "API Key"
 description = "Static secret key injected via HTTP header (x-api-key or Authorization)"
 mechanism   = "static-secret"
-header_name = "x-api-key"
 slot_type   = "secret-string"
 
 [meta]
