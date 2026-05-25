@@ -1,0 +1,17 @@
+id           = "channel-atoms/protocol/http"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-25T00:00:00Z"
+
+[body]
+name          = "HTTP"
+description   = "Hypertext Transfer Protocol — unencrypted, local-only use"
+wire_protocol = "tcp"
+default_port  = 80
+encryption    = false
+stateful      = false
+
+[meta]
+provenance = "https://www.rfc-editor.org/rfc/rfc9110"
+license    = "Apache-2.0"

@@ -1,0 +1,16 @@
+id           = "channel-atoms/auth-method/ssh-key"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-25T00:00:00Z"
+
+[body]
+name        = "SSH Key"
+description = "SSH public-key authentication — private key from slot, known_hosts required"
+mechanism   = "public-key"
+key_format  = "openssh"
+slot_type   = "file-path"
+
+[meta]
+provenance = "https://www.rfc-editor.org/rfc/rfc4252"
+license    = "Apache-2.0"

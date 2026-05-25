@@ -1,0 +1,17 @@
+id           = "channel-atoms/protocol/postgres"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-25T00:00:00Z"
+
+[body]
+name          = "PostgreSQL"
+description   = "PostgreSQL wire protocol — connection via DSN with SSL"
+wire_protocol = "tcp"
+default_port  = 5432
+encryption    = true
+stateful      = true
+
+[meta]
+provenance = "https://www.postgresql.org/docs/current/protocol.html"
+license    = "Apache-2.0"

@@ -1,0 +1,17 @@
+id           = "channel-atoms/auth-method/bearer-token"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-25T00:00:00Z"
+
+[body]
+name          = "Bearer Token"
+description   = "OAuth2-style bearer token in Authorization header"
+mechanism     = "bearer"
+header_name   = "Authorization"
+header_format = "Bearer {token}"
+slot_type     = "secret-string"
+
+[meta]
+provenance = "https://www.rfc-editor.org/rfc/rfc6750"
+license    = "Apache-2.0"
