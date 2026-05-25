@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+---
+<Base title="How to use" description="How to consume channel-atoms in your application.">
+  <h1>How to use channel-atoms</h1>
+
+  <h2>Read the catalog over HTTPS</h2>
+  <p>Every artifact is served under stable URLs with correct content-types:</p>
+  <pre><code>curl https://channel-atoms.com/exports/catalog.json
+curl https://channel-atoms.com/atoms/protocol/http.json
+curl https://channel-atoms.com/channels/slack-webhook.json
+curl https://channel-atoms.com/schemas/composition-v1.json</code></pre>
+
+  <h2>Resolve a channel composition</h2>
+  <p>A channel composition lists references to atoms by URI and version. To instantiate the channel,
+  fetch each referenced atom and assemble: protocol → endpoint → delivery semantic → transport → auth method.</p>
+
+  <pre><code>{`// pseudo-code
+const composition = await fetch("/channels/slack-webhook.json").then(r => r.json());
+const refs = composition.references;
+const protocol = await fetch(uriToUrl(refs.protocol.ref)).then(r => r.json());
+const endpoint = await fetch(uriToUrl(refs.endpoint.ref)).then(r => r.json());
+const deliverySemantic = await fetch(uriToUrl(refs.delivery_semantic.ref)).then(r => r.json());
+const transport = await fetch(uriToUrl(refs.transport.ref)).then(r => r.json());
+const authMethod = await fetch(uriToUrl(refs.auth_method.ref)).then(r => r.json());
+const channel = compileChannel({ protocol, endpoint, deliverySemantic, transport, authMethod });`}</code></pre>
+
+  <h2>Compatibility rules</h2>
+  <p>Rules in <a href="/exports/catalog.json"><code>/exports/catalog.json</code></a> (under the <code>rules</code>
+  key) declare predicates over atoms. Example: <code>auth-method/oauth2</code> requires
+  transport with <code>encryption: tls</code>. A composition
+  that violates a <code>require</code>-effect rule is malformed.</p>
+
+  <h2>Cross-platform portability</h2>
+  <p>v0.1 ships the catalog and its JSON Schema; compilers to specific messaging platforms
+  (Slack, email, SMS) are v0.2 work — they translate <code>endpoint</code> atoms into the platform's
+  native endpoint configuration and bind <code>auth-method</code> atoms to the platform's credential model.</p>
+</Base>
