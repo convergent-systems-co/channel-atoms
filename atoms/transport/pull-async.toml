@@ -1,0 +1,16 @@
+id           = "channel-atoms/transport/pull-async"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-25T00:00:00Z"
+
+[body]
+name        = "Pull Asynchronous"
+description = "Consumer polls or subscribes; message delivery is decoupled from the producer"
+direction   = "pull"
+sync_mode   = "asynchronous"
+retry_model = "broker-driven"
+
+[meta]
+provenance = "convergent-systems-co/channel-atoms"
+license    = "Apache-2.0"

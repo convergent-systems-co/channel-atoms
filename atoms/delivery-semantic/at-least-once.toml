@@ -1,0 +1,16 @@
+id           = "channel-atoms/delivery-semantic/at-least-once"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-25T00:00:00Z"
+
+[body]
+name        = "At-Least-Once"
+description = "Message delivered one or more times — redelivered on failure, consumer must be idempotent"
+guarantee   = "at-least-once"
+duplicates  = true
+loss_risk   = false
+
+[meta]
+provenance = "convergent-systems-co/channel-atoms"
+license    = "Apache-2.0"

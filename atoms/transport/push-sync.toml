@@ -1,0 +1,16 @@
+id           = "channel-atoms/transport/push-sync"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-25T00:00:00Z"
+
+[body]
+name        = "Push Synchronous"
+description = "Caller pushes a message and blocks until the response arrives"
+direction   = "push"
+sync_mode   = "synchronous"
+retry_model = "caller-driven"
+
+[meta]
+provenance = "convergent-systems-co/channel-atoms"
+license    = "Apache-2.0"
