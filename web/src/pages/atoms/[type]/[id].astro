@@ -1,0 +1,91 @@
+---
+import Base from "../../../layouts/Base.astro";
+import catalog from "../../../../public/exports/catalog.json";
+
+export function getStaticPaths() {
+  return catalog.atoms.map((atom: any) => ({
+    params: { type: atom.type, id: atom.id },
+    props: { atom },
+  }));
+}
+
+const { atom } = Astro.props;
+
+// Pick the type-specific payload
+const protocol = atom.protocol;
+const endpoint = atom.endpoint;
+const deliverySemantic = atom.delivery_semantic;
+const transport = atom.transport;
+const authMethod = atom.auth_method;
+---
+<Base title={atom.name} description={atom.description ?? `${atom.type} atom`}>
+  <p><a href="/atoms/">← All atoms</a></p>
+  <h1>{atom.name}</h1>
+  <p style="color: var(--muted);">
+    <code>{atom.type}</code> · <code>v{atom.version}</code>
+  </p>
+
+  {atom.description && <p>{atom.description}</p>}
+
+  {atom.tags && atom.tags.length > 0 && (
+    <p>
+      Tags: {atom.tags.map((tag: string) => (
+        <span style="display: inline-block; font-size: 0.875rem; background: #f4ece4; padding: 0.125rem 0.5rem; border-radius: 0.25rem; margin-right: 0.25rem;">{tag}</span>
+      ))}
+    </p>
+  )}
+
+  {protocol && (
+    <section>
+      <h2>Protocol</h2>
+      <dl style="display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem;">
+        {protocol.scheme && (<><dt>Scheme</dt><dd><code>{protocol.scheme}</code></dd></>)}
+        {protocol.transport && (<><dt>Transport</dt><dd><code>{protocol.transport}</code></dd></>)}
+        {protocol.auth && (<><dt>Auth</dt><dd><code>{protocol.auth}</code></dd></>)}
+      </dl>
+    </section>
+  )}
+
+  {endpoint && (
+    <section>
+      <h2>Endpoint</h2>
+      <dl style="display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem;">
+        {endpoint.platform && (<><dt>Platform</dt><dd>{endpoint.platform}</dd></>)}
+        {endpoint.url_pattern && (<><dt>URL pattern</dt><dd><code>{endpoint.url_pattern}</code></dd></>)}
+      </dl>
+    </section>
+  )}
+
+  {deliverySemantic && (
+    <section>
+      <h2>Delivery semantic</h2>
+      <dl style="display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem;">
+        {deliverySemantic.guarantee && (<><dt>Guarantee</dt><dd><code>{deliverySemantic.guarantee}</code></dd></>)}
+        {deliverySemantic.ordering && (<><dt>Ordering</dt><dd><code>{deliverySemantic.ordering}</code></dd></>)}
+      </dl>
+    </section>
+  )}
+
+  {transport && (
+    <section>
+      <h2>Transport</h2>
+      <dl style="display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem;">
+        {transport.mechanism && (<><dt>Mechanism</dt><dd><code>{transport.mechanism}</code></dd></>)}
+        {transport.encryption && (<><dt>Encryption</dt><dd><code>{transport.encryption}</code></dd></>)}
+      </dl>
+    </section>
+  )}
+
+  {authMethod && (
+    <section>
+      <h2>Auth method</h2>
+      <dl style="display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem;">
+        {authMethod.scheme && (<><dt>Scheme</dt><dd><code>{authMethod.scheme}</code></dd></>)}
+        {authMethod.token_type && (<><dt>Token type</dt><dd><code>{authMethod.token_type}</code></dd></>)}
+      </dl>
+    </section>
+  )}
+
+  <h2>Raw atom</h2>
+  <p><a href={`/atoms/${atom.type}/${atom.id}.json`}>/atoms/{atom.type}/{atom.id}.json</a> · <a href="/schemas/atom-v1.json">schema</a></p>
+</Base>
