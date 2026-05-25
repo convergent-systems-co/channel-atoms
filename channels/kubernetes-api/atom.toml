@@ -1,0 +1,21 @@
+id           = "channel-atoms/channels/kubernetes-api"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-25T00:00:00Z"
+
+[channel]
+name                = "Kubernetes API"
+description         = "Kubernetes REST API channel — credentials sourced from kubeconfig"
+protocol_ref        = "channel-atoms/protocol/k8s-api"
+auth_method_ref     = "channel-atoms/auth-method/kubeconfig"
+transport_ref       = "channel-atoms/transport/push-sync"
+delivery_ref        = "channel-atoms/delivery-semantic/at-most-once"
+endpoint_template   = "https://{cluster_host}:{cluster_port}"
+encryption_required = true
+timeout_seconds     = 30
+tags                = ["kubernetes", "k8s", "orchestration"]
+
+[meta]
+provenance = "https://kubernetes.io/docs/concepts/overview/kubernetes-api/"
+license    = "Apache-2.0"
