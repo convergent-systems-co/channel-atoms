@@ -1,0 +1,16 @@
+id           = "channel-atoms/auth-method/api-key"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-25T00:00:00Z"
+
+[body]
+name        = "API Key"
+description = "Static secret key injected via HTTP header (x-api-key or Authorization)"
+mechanism   = "static-secret"
+header_name = "x-api-key"
+slot_type   = "secret-string"
+
+[meta]
+provenance = "https://swagger.io/docs/specification/authentication/api-keys/"
+license    = "Apache-2.0"
