@@ -1,0 +1,45 @@
+# atoms/kubernetes-api.toml — SRE channel atom: Kubernetes API
+#
+# Typed channel for the Kubernetes REST API.
+# Direction: bidirectional (agent reads cluster state and applies changes).
+# Encoding: json (Kubernetes API serializes all resources as JSON).
+#
+# Conforms to: channel-atoms catalog spec (atoms-spec/v1.1.0)
+
+id           = "channel-atoms/channel/kubernetes-api"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-26T00:00:00Z"
+
+[body]
+name                = "Kubernetes API"
+description         = "Bidirectional channel for the Kubernetes REST API — read cluster state, apply manifests, scale workloads, and retrieve logs."
+type                = "kubernetes-api"
+direction           = "bidirectional"
+encoding            = "json"
+protocol_ref        = "channel-atoms/protocol/k8s-api"
+auth_method_ref     = "channel-atoms/auth-method/kubeconfig"
+transport_ref       = "channel-atoms/transport/push-sync"
+delivery_ref        = "channel-atoms/delivery-semantic/at-most-once"
+endpoint_template   = "https://{cluster_host}:{cluster_port}"
+encryption_required = true
+timeout_seconds     = 60
+max_payload_bytes   = 0
+
+[body.slot_types]
+kubeconfig_path     = "file-path"
+cluster_host        = "secret-string"
+cluster_port        = "integer"
+service_account_token = "secret-string"
+
+[body.operations]
+safe     = ["get", "list", "watch", "describe", "logs", "top", "events"]
+mutating = ["apply", "create", "patch", "delete", "scale", "rollout", "exec"]
+
+[body.tags]
+tags = ["sre", "kubernetes", "k8s", "orchestration", "bidirectional"]
+
+[meta]
+provenance = "https://kubernetes.io/docs/concepts/overview/kubernetes-api/"
+license    = "Apache-2.0"
