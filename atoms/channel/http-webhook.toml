@@ -1,0 +1,44 @@
+# atoms/channel/http-webhook.toml — Olympus provider channel: outbound HTTP webhook
+#
+# Typed channel for outbound HTTP webhook delivery.
+# Direction: outbound (agent POSTs events to a caller-configured endpoint).
+# Encoding: json (application/json request bodies).
+#
+# Conforms to: channel-atoms catalog spec (atoms-spec/v1.1.0)
+
+id           = "channel-atoms/channel/http-webhook"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-26T00:00:00Z"
+
+[body]
+name                = "HTTP Webhook"
+description         = "Outbound HTTP webhook channel — agent POSTs JSON event payloads to a caller-supplied URL. Used by Olympus to push tool-call results and lifecycle events to external systems."
+type                = "http"
+direction           = "outbound"
+encoding            = "json"
+protocol_ref        = "channel-atoms/protocol/https"
+auth_method_ref     = "channel-atoms/auth-method/bearer-token"
+transport_ref       = "channel-atoms/transport/push-sync"
+delivery_ref        = "channel-atoms/delivery-semantic/at-least-once"
+endpoint_template   = "https://{host}/{path}"
+encryption_required = true
+timeout_seconds     = 30
+max_payload_bytes   = 65536
+
+[body.slot_types]
+bearer_token    = "secret-string"
+webhook_url     = "string"
+signing_secret  = "secret-string"
+
+[body.operations]
+safe     = []
+mutating = ["post-event"]
+
+[body.tags]
+tags = ["http", "webhook", "outbound", "events", "olympus"]
+
+[meta]
+provenance = "https://www.rfc-editor.org/rfc/rfc9110"
+license    = "Apache-2.0"

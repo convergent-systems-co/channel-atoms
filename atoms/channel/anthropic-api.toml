@@ -1,0 +1,44 @@
+# atoms/channel/anthropic-api.toml — Olympus provider channel: Anthropic Messages API
+#
+# Typed channel for the Anthropic Claude Messages API.
+# Direction: duplex (agent sends requests and receives streamed/batch responses).
+# Encoding: json (Anthropic API v1 uses JSON request and response bodies).
+#
+# Conforms to: channel-atoms catalog spec (atoms-spec/v1.1.0)
+
+id           = "channel-atoms/channel/anthropic-api"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-26T00:00:00Z"
+
+[body]
+name                = "Anthropic API"
+description         = "Duplex HTTPS channel for the Anthropic Claude Messages API — send prompts and receive completions or streamed token events."
+type                = "anthropic-api"
+direction           = "duplex"
+encoding            = "json"
+protocol_ref        = "channel-atoms/protocol/https"
+auth_method_ref     = "channel-atoms/auth-method/api-key"
+transport_ref       = "channel-atoms/transport/push-sync"
+delivery_ref        = "channel-atoms/delivery-semantic/at-most-once"
+endpoint_template   = "https://api.anthropic.com/v1"
+encryption_required = true
+timeout_seconds     = 120
+max_payload_bytes   = 1048576
+
+[body.slot_types]
+api_key        = "secret-string"
+anthropic_version = "string"
+model          = "string"
+
+[body.operations]
+safe     = ["messages-stream"]
+mutating = ["messages-create"]
+
+[body.tags]
+tags = ["ai", "llm", "anthropic", "claude", "olympus", "duplex"]
+
+[meta]
+provenance = "https://docs.anthropic.com/en/api/getting-started"
+license    = "Apache-2.0"

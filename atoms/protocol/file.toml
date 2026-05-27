@@ -1,0 +1,17 @@
+id           = "channel-atoms/protocol/file"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-26T00:00:00Z"
+
+[body]
+name          = "File System"
+description   = "OS file-system protocol — inotify (Linux), FSEvents (macOS), kqueue (BSD) for watching path changes"
+wire_protocol = "os-syscall"
+default_port  = 0
+encryption    = false
+stateful      = false
+
+[meta]
+provenance = "https://man7.org/linux/man-pages/man7/inotify.7.html"
+license    = "Apache-2.0"
