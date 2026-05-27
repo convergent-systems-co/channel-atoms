@@ -1,0 +1,17 @@
+id           = "channel-atoms/protocol/grpc"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-26T00:00:00Z"
+
+[body]
+name          = "gRPC"
+description   = "gRPC remote procedure call protocol over HTTP/2 — binary protobuf framing, bidirectional streaming"
+wire_protocol = "tcp"
+default_port  = 443
+encryption    = true
+stateful      = true
+
+[meta]
+provenance = "https://grpc.io/docs/what-is-grpc/core-concepts/"
+license    = "Apache-2.0"

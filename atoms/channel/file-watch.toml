@@ -1,0 +1,43 @@
+# atoms/channel/file-watch.toml — Olympus provider channel: file-system watch (inbound)
+#
+# Typed channel for watching file-system paths for changes.
+# Direction: inbound (agent receives change events from the OS; no writes via this channel).
+# Encoding: text (file paths and event types delivered as plain text or JSON-lines).
+#
+# Conforms to: channel-atoms catalog spec (atoms-spec/v1.1.0)
+
+id           = "channel-atoms/channel/file-watch"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-26T00:00:00Z"
+
+[body]
+name                = "File Watch"
+description         = "Inbound file-system watch channel — agent subscribes to OS inotify/FSEvents/kqueue events for a path and receives create/modify/delete notifications. Used by Olympus for file-triggered workflows."
+type                = "file"
+direction           = "inbound"
+encoding            = "text"
+protocol_ref        = "channel-atoms/protocol/file"
+auth_method_ref     = "channel-atoms/auth-method/none"
+transport_ref       = "channel-atoms/transport/pull-async"
+delivery_ref        = "channel-atoms/delivery-semantic/at-most-once"
+endpoint_template   = "{path}"
+encryption_required = false
+timeout_seconds     = 0
+
+[body.slot_types]
+watch_path    = "file-path"
+glob_pattern  = "string"
+event_types   = "string"
+
+[body.operations]
+safe     = ["watch", "list-events"]
+mutating = []
+
+[body.tags]
+tags = ["file", "watch", "inotify", "fsevents", "inbound", "olympus"]
+
+[meta]
+provenance = "https://man7.org/linux/man-pages/man7/inotify.7.html"
+license    = "Apache-2.0"

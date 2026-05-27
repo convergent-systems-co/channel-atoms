@@ -1,0 +1,46 @@
+# atoms/channel/redis-pubsub.toml — Olympus provider channel: Redis Pub/Sub
+#
+# Typed channel for Redis Pub/Sub messaging.
+# Direction: duplex (agent can publish to channels and subscribe to receive messages).
+# Encoding: json (JSON-serialized message payloads).
+#
+# Conforms to: channel-atoms catalog spec (atoms-spec/v1.1.0)
+
+id           = "channel-atoms/channel/redis-pubsub"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-26T00:00:00Z"
+
+[body]
+name                = "Redis Pub/Sub"
+description         = "Duplex Redis Pub/Sub channel — publish JSON messages to named channels and subscribe to receive them. Used by Olympus for cross-agent event broadcasting and tool-result delivery."
+type                = "redis"
+direction           = "duplex"
+encoding            = "json"
+protocol_ref        = "channel-atoms/protocol/redis"
+auth_method_ref     = "channel-atoms/auth-method/password"
+transport_ref       = "channel-atoms/transport/pull-async"
+delivery_ref        = "channel-atoms/delivery-semantic/at-most-once"
+endpoint_template   = "redis://:{password}@{host}:{port}/{db}"
+encryption_required = false
+timeout_seconds     = 30
+max_payload_bytes   = 524288
+
+[body.slot_types]
+redis_password = "secret-string"
+host           = "string"
+port           = "integer"
+db             = "integer"
+channel_prefix = "string"
+
+[body.operations]
+safe     = ["subscribe", "psubscribe"]
+mutating = ["publish", "unsubscribe"]
+
+[body.tags]
+tags = ["redis", "pubsub", "messaging", "async", "duplex", "olympus"]
+
+[meta]
+provenance = "https://redis.io/docs/manual/pubsub/"
+license    = "Apache-2.0"

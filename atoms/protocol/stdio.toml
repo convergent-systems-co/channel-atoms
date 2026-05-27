@@ -1,0 +1,17 @@
+id           = "channel-atoms/protocol/stdio"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-26T00:00:00Z"
+
+[body]
+name          = "Stdio"
+description   = "POSIX standard I/O streams (stdin/stdout/stderr) — newline-framed text or JSON-lines for subprocess communication"
+wire_protocol = "pipe"
+default_port  = 0
+encryption    = false
+stateful      = true
+
+[meta]
+provenance = "https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/stdio.h.html"
+license    = "Apache-2.0"

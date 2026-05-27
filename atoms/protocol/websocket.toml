@@ -1,0 +1,17 @@
+id           = "channel-atoms/protocol/websocket"
+version      = "1.0.0"
+content_hash = ""
+lifecycle    = "draft"
+created_at   = "2026-05-26T00:00:00Z"
+
+[body]
+name          = "WebSocket"
+description   = "WebSocket full-duplex protocol over TCP — persistent connection, low-latency bidirectional frames"
+wire_protocol = "tcp"
+default_port  = 443
+encryption    = true
+stateful      = true
+
+[meta]
+provenance = "https://www.rfc-editor.org/rfc/rfc6455"
+license    = "Apache-2.0"
